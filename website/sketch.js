@@ -24,23 +24,11 @@ async function setup(){
 
 let bool = true;
 function draw(){
-    
-    if(bool){
+    do {
         loadPixels();
         if(pixelArray){
             console.log(pixelArray)
-            // for (let i = 0; i < 2250; i++){
-            //     for (let j = 0; j < 2250; j++){
-            //         pixels[pixelAnzahl+0] = pixelArray.arrayOne[i][j][0];
-            //         pixels[pixelAnzahl+1] = pixelArray.arrayOne[i][j][1];
-            //         pixels[pixelAnzahl+2] = pixelArray.arrayOne[i][j][2];
-            //         pixels[pixelAnzahl+3] = 255;
-    
-            //         pixelAnzahl++;
-            //     }
-            //     pixelAnzahl++;
-            // }
-    
+  
             for (let y = 0; y <  1072; y++){
                 for (let x = 0; x < 1952; x++){
                     let index = (x + y  * width) * 4; 
@@ -55,7 +43,19 @@ function draw(){
             bool = false;
         }
         updatePixels();
-    }
+    } while (bool);
+    
+        
+}
 
    
-}
+
+
+document.querySelector('#defaultCanvas0').addEventListener("click", c =>{
+    mX = MouseX;
+    mY = MouseY;
+
+    let url = new URL("${window.location}/info.html");
+
+
+});
