@@ -12,6 +12,52 @@ async function getImg(url){
     return response.json();
 }
 
+function colorDistance(x,y){
+    let d = sqrt(abs(x * x - y * y));
+    return d;
+}
+
+const colorMap = new Map();
+
+/** 
+ * Abrahamic faiths
+ * */ 
+
+    // Islam
+    colorMap.set("Sunni", [88, 173, 96]);
+    colorMap.set("Shia", [179, 222, 106]);
+    colorMap.set("Ibadi", [1, 88, 37]);
+
+    // Judaism
+    colorMap.set("Judentum", [88, 173, 96]);
+
+    // Christianity 
+    colorMap.set("Katholisch", [215, 94, 78]);
+    colorMap.set("Evangelisch", [117, 173, 210]);
+    colorMap.set("Orthodox",[128, 115, 171] );
+    colorMap.set("Orientalisch Orthodox", [191, 127, 39]);
+    colorMap.set("Mormonen", [169, 221, 181]);
+
+/** 
+ * Indian/Dhharmic faiths
+ * */ 
+
+    colorMap.set("Hinduismus", [252, 171, 80]);
+    colorMap.set("Sikkismus", [179, 87, 8]);
+    colorMap.set("Theravada Buddismus", [255, 108, 184]);
+    colorMap.set("Mahayana Buddismus", [250, 128, 112]);
+    colorMap.set("Vajrayana Buddismus", [251, 185, 220]);
+
+/** 
+ * Others
+ * */  
+
+    colorMap.set("Chinesische Religion", [254, 236, 111]);
+    colorMap.set("Vietnamesische Volksreligion", [127, 128, 0]);
+    colorMap.set("Schintoismus", [198, 191, 230]);
+    colorMap.set("Shinismus ", [128, 0, 0]);
+    colorMap.set("Indigenous religions", [243, 235, 194]);
+
 let bool = true;
 async function setup(){
     createCanvas(floor(1952), floor(screenY / 1.25));
@@ -21,42 +67,56 @@ async function setup(){
     background(1);
 
 
-    document.querySelector('#defaultCanvas0').addEventListener("click", c =>{
+    document.querySelector('#defaultCanvas0').addEventListener("click", () =>{
         let mX = mouseX;
         let mY = mouseY;
+        console.log(mX, mY)
 
         let pixel = [];
         loadPixels();
+
+        
+
+        
+
 
         pixel.push((floor(mX) + floor(mY)  * width) * 4);
         pixel.push(pixels[pixel[0]]);
         pixel.push(pixels[pixel[0]+1]);
         pixel.push(pixels[pixel[0]+2]);
         pixel.push(pixels[pixel[0]+3]);
-        
-        
         console.log(pixel);
 
-        switch (true){
-            case pixel[1] < 110 && pixel[2] > 150 && pixel[3] < 110:
+        
+        let average;
+        let kleinsterAverage = 255;
+        let religion; 
+        let count = 0;
 
-            console.log("GREEEN");
-            break;
-            case pixel[1] < 30 && pixel[2] > 80 && pixel[3] < 70:
+        colorMap.forEach(color =>{
+            let redD = colorDistance(color[0], pixel[1]);
+            let greenD = colorDistance(color[1], pixel[2]);
+            let blueD = colorDistance(color[2], pixel[3]);
+            
+            console.log("R: " + redD, "G: " + greenD, "B: " + blueD)
 
-            console.log("GREEEN");
-            break;
-        }
+            average = (redD + greenD + blueD) / 3;
+            console.log(average);
 
-        console.log(mX, mY)
+            if(average < kleinsterAverage){
+                kleinsterAverage = average;
+                religion = Array.from(colorMap)[count][0];
+            }
+            count++;
+        });
+        console.log(religion)
+        
         let location = window.location.href;
         let url = new URL(location.replace("index.html", "info.html")); 
 
-        let parameter = new URLSearchParams(url.search);
-    
-
-        parameter.append("searchh", "g");
+        url.searchParams.append("religion", religion)
         console.log(url)
+        window.location = url;
     });
 
         loadPixels();
