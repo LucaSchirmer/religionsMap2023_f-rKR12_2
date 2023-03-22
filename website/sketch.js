@@ -12,8 +12,13 @@ async function getImg(url){
     return response.json();
 }
 
-function colorDistance(x,y){
-    let d = sqrt(abs(x * x - y * y));
+function colorDistance(r1, r2, g1, g2, b1, b2){
+    console.log("red: ", sqrt((r1-r2) * (r1-r2)))
+    console.log("green: ", sqrt((g1-g2) * (g1-g2)))
+    console.log("blue: ", sqrt((b1-b2) * (b1-b2)))
+    let value = (r1-r2) * (r1-r2) + (g1-g2) * (g1-g2) + (b1-b2) * (b1-b2)
+    let d = sqrt(value);
+    console.log("distance: ", d)
     return d;
 }
 
@@ -34,7 +39,7 @@ const colorMap = new Map();
     // Christianity 
     colorMap.set("Katholisch", [215, 94, 78]);
     colorMap.set("Evangelisch", [117, 173, 210]);
-    colorMap.set("Orthodox",[128, 115, 171] );
+    colorMap.set("Orthodox",[128, 115, 171]);
     colorMap.set("Orientalisch Orthodox", [191, 127, 39]);
     colorMap.set("Mormonen", [169, 221, 181]);
 
@@ -60,7 +65,7 @@ const colorMap = new Map();
 
 let bool = true;
 async function setup(){
-    createCanvas(floor(1952), floor(screenY / 1.25));
+    createCanvas(floor(1952), floor(1072));
     pixelDensity(1);
     pixelArray = await getImg("../img.json");
     
@@ -76,41 +81,42 @@ async function setup(){
         loadPixels();
 
         
-
+        
         
 
 
-        pixel.push((floor(mX) + floor(mY)  * width) * 4);
+        pixel.push((floor(mX) + floor(mY)  * 1952) * 4);
         pixel.push(pixels[pixel[0]]);
         pixel.push(pixels[pixel[0]+1]);
         pixel.push(pixels[pixel[0]+2]);
         pixel.push(pixels[pixel[0]+3]);
         console.log(pixel);
 
+        let whiteCheck = colorDistance(pixel[1], pixel[2], pixel[1], pixel[3], pixel[2], pixel[3]);
+        console.log(whiteCheck)
+
+        // vllt WHITECHECK VERKLEINERN
+        if(whiteCheck < 15){
+            console.log("Clicked Color is WHITE")
+            return;
+        }
         
-        let average;
-        let kleinsterAverage = 255;
+        let kleinsterWert = 255;
         let religion; 
         let count = 0;
 
         colorMap.forEach(color =>{
-            let redD = colorDistance(color[0], pixel[1]);
-            let greenD = colorDistance(color[1], pixel[2]);
-            let blueD = colorDistance(color[2], pixel[3]);
-            
-            console.log("R: " + redD, "G: " + greenD, "B: " + blueD)
+            let dis = colorDistance(color[0], pixel[1], color[1], pixel[2], color[2], pixel[3]);    
 
-            average = (redD + greenD + blueD) / 3;
-            console.log(average);
-
-            if(average < kleinsterAverage){
-                kleinsterAverage = average;
+            if(dis < kleinsterWert){
+                kleinsterWert = dis;
                 religion = Array.from(colorMap)[count][0];
+                console.log(kleinsterWert)
             }
             count++;
         });
         console.log(religion)
-        
+            
         let location = window.location.href;
         let url = new URL(location.replace("index.html", "info.html")); 
 

@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1 minimum-scale=5">
     <title>Interaktive Karte der Weltreligionen</title>
 </head>
 <body>
-    
+    <section class="legende">
+        <a href="Quellen.html">Quellen</a>
+    </section>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js"></script>
 <script src="sketch.js"> </script>
@@ -23,6 +25,22 @@
         place-content: center;
         padding: 2%;
     }
+
+    body{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .legende{
+        height: 10vh; 
+        font-size: 3vh;
+        background-color: black;
+        color: white;
+
+        display: grid; 
+        place-content: center;
+    }
+
 
 </style>
 <!-- Map credit: https://www.reddit.com/r/MapPorn/comments/pn13hg/largest_religion_by_national_subdivision/ -->
