@@ -8,7 +8,31 @@
 </head>
 <body>
     <section class="legende">
-        <a href="Quellen.html">Quellen</a>
+        <div class="burger">
+            <div class="burgerRow"></div>
+            <div class="burgerRow"></div>
+            <div class="burgerRow"></div>
+        </div>
+        <div class="hiddenLegende religionsOverview">
+            <img src="../legende_1_AbF.png" alt="Legende Abrahamic faiths">
+            <img src="../legende_1_DhInF.png" alt="Legende Indian and Dharmic faiths">
+            <img src="../legende_1_OF.png" alt="Legende Indian and Dharmic faiths">
+
+        </div>
+    </section>
+    <section class="footer">
+        <ul class="footerList">
+            <li class="listItem">
+                <a href="Quellen.html">Quellen</a>
+            </li>
+            <li class="listItem">
+                <a target="_blank" href="https://github.com/LucaSchirmer/religionsMap2023_f-rKR12_2">Github</a>
+            </li>
+
+            <li class="listItem">
+                Erstellt von Luca Schirmer 2023
+            </li> 
+        </ul>   
     </section>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js"></script>
@@ -16,9 +40,19 @@
 </html>
 
 <style>
+    :root{
+        font-size: 16px;
+
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+
     *{
         padding: 0;
         margin: 0;
+    }
+
+    a{
+        color: white !important;
     }
     main{
         display: grid; 
@@ -31,14 +65,72 @@
         flex-direction: column-reverse;
     }
 
-    .legende{
+    .footer{
         height: 10vh; 
+        width: 100%;
         font-size: 3vh;
         background-color: black;
         color: white;
 
         display: grid; 
         place-content: center;
+    }
+
+    .footerList{
+        display: flex; 
+        flex-direction: row;
+        justify-content: space-evenly;
+        list-style: none;
+        width: 100vw;     
+    }
+
+    .burger{ 
+        display: flex; 
+        flex-direction: column;
+
+        height: 25px;
+        width: 40px;
+
+        justify-content: space-between;
+        position: fixed; 
+        z-index: 101;
+        top: 2vh;
+        left: 1.5vw;
+
+        transition: all 0.5s linear;
+    }
+
+    .burgerRow{
+        height: 5px; 
+        width: 37px; 
+        background-color: rgb(64, 64, 64);
+
+        outline: 2px solid white;
+    }
+
+    .toggleBurger{
+        transform: translateX(30vw);
+    }
+
+    .hiddenLegende{
+        transform: translateX(-35vw);
+    }
+
+    .religionsOverview{
+        width: 35vw;
+        height:  100vh;
+        position: fixed; 
+        left: 0; 
+        top: 0;
+        background-color: rgb(64, 64, 64);
+
+        transition: all 0.6s ease-in-out;
+    }
+
+    .religionsOverview img{
+        object-fit: contain;
+        width: 35vw;
+        padding-bottom: 5vh;
     }
 
 

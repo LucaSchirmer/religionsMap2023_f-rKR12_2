@@ -1,5 +1,28 @@
 "use strict"
 
+// Burger Animation
+
+const burger = document.querySelector(".burger");
+const religionsOverview = document.querySelector(".religionsOverview");
+
+burger.addEventListener("click", ()=>{
+    burger.classList.toggle("toggleBurger");
+    religionsOverview.classList.toggle("hiddenLegende");
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+//  Map
 let pixelAnzahl = 0;
 let pixelArray;
 
@@ -79,10 +102,6 @@ async function setup(){
 
         let pixel = [];
         loadPixels();
-
-        
-        
-        
 
 
         pixel.push((floor(mX) + floor(mY)  * 1952) * 4);
