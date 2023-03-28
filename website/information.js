@@ -29,10 +29,15 @@ window.onload = async () =>{
             let text = document.querySelector(".infoBlock");
             text.innerHTML = "";
             text.innerHTML = await getData(dataUrl);
-
+            
             let img = document.createElement("img");
-            img.src = `${religion}/${religion}.jpg` || `${religion}/${religion}.png`;
+            img.src = (`${religion}/${religion}.jpg` || `${religion}/${religion}.png` ||  `${religion}/${religion}.webp`);
 
+
+            const article = document.querySelector("article");
+
+            article.appendChild(img)
+            
         }
 
 
