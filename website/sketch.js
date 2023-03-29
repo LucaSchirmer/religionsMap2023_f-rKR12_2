@@ -83,14 +83,14 @@ const colorMap = new Map();
     colorMap.set("Chinesische Religion", [254, 236, 111]);
     colorMap.set("Vietnamesische Volksreligion", [127, 128, 0]);
     colorMap.set("Schintoismus", [198, 191, 230]);
-    colorMap.set("Shinismus ", [128, 0, 0]);
+    colorMap.set("Shinismus", [128, 0, 0]);
     colorMap.set("Indigenous religions", [243, 235, 194]);
 
 let bool = true;
 async function setup(){
     createCanvas(floor(1952), floor(1072));
     pixelDensity(1);
-    pixelArray = await getImg("../img.json");
+    pixelArray = await getImg("../imgPng.json");
     
     background(1);
 

@@ -21,5 +21,5 @@ numpyArray = np.array(img2)
 
 
 numpyData = {"arrayOne": numpyArray}
-with open("img.json", "w") as write_file:
+with open("imgPng.json", "w") as write_file:
     json.dump(numpyData, write_file, cls=NumpyArrayEncoder)
