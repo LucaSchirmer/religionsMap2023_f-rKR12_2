@@ -30,7 +30,7 @@ async function getImg(url){
     console.log("fetching");
     const response = await fetch(url,{
         method: "GET",
-        cache: "force-cache"
+        cache: "no-cache"
     });
     return response.json();
 }
