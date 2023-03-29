@@ -36,7 +36,27 @@
     </section>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js"></script>
-<script src="sketch.js"> </script>
+
+<script>
+
+    var scriptSrc; 
+    var body = document.body,
+    html = document.documentElement;
+
+    var width = Math.max( body.scrollWidth, body.offsetWidth, 
+                       html.clientWidth, html.scrollWidth, html.offsetWidth );
+    
+    if(width < 1700){
+        scriptSrc = "tabletSketch.js";
+    }else{
+        scriptSrc = "sketch.js";
+    }
+    var s = document.createElement('script');
+    s.setAttribute('src', scriptSrc);
+    document.body.appendChild(s);
+</script>
+
+
 </html>
 
 <style>

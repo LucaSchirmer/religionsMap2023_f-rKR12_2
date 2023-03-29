@@ -3,7 +3,7 @@ from PIL import Image
 from json import JSONEncoder
 import json
 
-img1 = Image.open('worldReligionMap.jpg')
+img1 = Image.open('worldReligionMapUpdated.jpg')
 
 pixels = np.array(img1)
 

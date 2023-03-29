@@ -90,7 +90,7 @@ let bool = true;
 async function setup(){
     createCanvas(floor(1952), floor(1072));
     pixelDensity(1);
-    pixelArray = await getImg("../imgPng.json");
+    pixelArray = await getImg("../img.json");
     
     background(1);
 
